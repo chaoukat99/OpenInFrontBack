@@ -1,15 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Brain, Network, Cpu, Zap, Activity, Sparkles, Code2, Database, Lock, Fingerprint } from "lucide-react";
+import { Brain, Network, Cpu, Zap, Activity, Sparkles, Code2, Database, Lock, Fingerprint, Users, Building2, Briefcase, Info } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { SectionGlow } from "@/components/ui/SectionGlow";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 export const GSAPShowcase = () => {
     const containerRef = useRef<HTMLElement>(null);
     const { t } = useLanguage();
+    const [selectedNode, setSelectedNode] = useState<{ id: string; title: string; desc: string; icon: any; color: string } | null>(null);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -66,23 +74,14 @@ export const GSAPShowcase = () => {
                         style={{ y: yMove }}
                         className="lg:w-1/2 space-y-8"
                     >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                            </span>
-                            <span className="text-xs font-bold text-primary tracking-widest uppercase">
-                                {t('gsap_showcase.badge')}
-                            </span>
-                        </div>
+                     
 
-                        <h2 className="text-5xl lg:text-7xl font-black tracking-tight leading-[0.9] text-foreground">
-                            {t('gsap_showcase.title_part1')} <br />
+                        <h2 style={{fontSize:25}} className="text-2xl md:text-3xl lg:text-[40px] font-black tracking-tight leading-tight text-foreground flex flex-wrap gap-x-4">
+                            <span>{t('gsap_showcase.title_part1')}</span>
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
                                 {t('gsap_showcase.title_highlight')}
                             </span>
-                            <br />
-                            {t('gsap_showcase.title_part2')}
+                            <span>{t('gsap_showcase.title_part2')}</span>
                         </h2>
 
                         <p className="text-lg text-muted-foreground leading-relaxed max-w-lg font-light">
@@ -122,9 +121,12 @@ export const GSAPShowcase = () => {
 
                             {/* Connecting Lines (SVG) */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                                <line x1="50%" y1="50%" x2="50%" y2="15%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
-                                <line x1="50%" y1="50%" x2="85%" y2="80%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
-                                <line x1="50%" y1="50%" x2="15%" y2="80%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
+                                {/* Top to Bottom */}
+                                <line x1="50%" y1="50%" x2="50%" y2="10%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="50%" y2="90%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
+                                {/* Left to Right */}
+                                <line x1="50%" y1="50%" x2="10%" y2="50%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
+                                <line x1="50%" y1="50%" x2="90%" y2="50%" stroke="currentColor" className="text-primary/20" strokeWidth="2" strokeDasharray="4 4" />
 
                                 <circle cx="50%" cy="50%" r="180" fill="none" stroke="currentColor" className="text-primary/5" strokeWidth="1" />
                             </svg>
@@ -145,14 +147,65 @@ export const GSAPShowcase = () => {
                             </div>
 
                             {/* Satellite Nodes */}
-                            <div className="absolute top-10 left-1/2 -translate-x-1/2 -translate-y-4 tech-card">
-                                <HexNode icon={Fingerprint} label={t('gsap_showcase.visual.security')} color="text-emerald-400" />
+                            {/* Top: Talent */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 tech-card">
+                                <HexNode
+                                    icon={Users}
+                                    label={t('gsap_showcase.visual.talent')}
+                                    color="text-blue-400"
+                                    onClick={() => setSelectedNode({
+                                        id: 'talent',
+                                        title: t('gsap_showcase.visual.talent'),
+                                        desc: t('gsap_showcase.visual.talent_desc'),
+                                        icon: Users,
+                                        color: 'text-blue-400'
+                                    })}
+                                />
                             </div>
-                            <div className="absolute bottom-20 left-10 tech-card">
-                                <HexNode icon={Database} label={t('gsap_showcase.visual.data')} color="text-blue-400" />
+                            {/* Right: Ghaya */}
+                            <div className="absolute top-1/2 right-0 -translate-y-1/2 tech-card">
+                                <HexNode
+                                    icon={Sparkles}
+                                    label={t('gsap_showcase.visual.ghaya')}
+                                    color="text-purple-400"
+                                    onClick={() => setSelectedNode({
+                                        id: 'ghaya',
+                                        title: t('gsap_showcase.visual.ghaya'),
+                                        desc: t('gsap_showcase.visual.ghaya_desc'),
+                                        icon: Sparkles,
+                                        color: 'text-purple-400'
+                                    })}
+                                />
                             </div>
-                            <div className="absolute bottom-20 right-10 tech-card">
-                                <HexNode icon={Network} label={t('gsap_showcase.visual.neural')} color="text-purple-400" />
+                            {/* Bottom: Cabinet */}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 tech-card">
+                                <HexNode
+                                    icon={Briefcase}
+                                    label={t('gsap_showcase.visual.cabinet')}
+                                    color="text-orange-400"
+                                    onClick={() => setSelectedNode({
+                                        id: 'cabinet',
+                                        title: t('gsap_showcase.visual.cabinet'),
+                                        desc: t('gsap_showcase.visual.cabinet_desc'),
+                                        icon: Briefcase,
+                                        color: 'text-orange-400'
+                                    })}
+                                />
+                            </div>
+                            {/* Left: Company */}
+                            <div className="absolute top-1/2 left-0 -translate-y-1/2 tech-card">
+                                <HexNode
+                                    icon={Building2}
+                                    label={t('gsap_showcase.visual.company')}
+                                    color="text-emerald-400"
+                                    onClick={() => setSelectedNode({
+                                        id: 'company',
+                                        title: t('gsap_showcase.visual.company'),
+                                        desc: t('gsap_showcase.visual.company_desc'),
+                                        icon: Building2,
+                                        color: 'text-emerald-400'
+                                    })}
+                                />
                             </div>
 
                         </motion.div>
@@ -160,6 +213,34 @@ export const GSAPShowcase = () => {
 
                 </div>
             </div>
+
+            {/* Entity Details Modal */}
+            <Dialog open={!!selectedNode} onOpenChange={() => setSelectedNode(null)}>
+                <DialogContent className="sm:max-w-lg bg-[#020617]/95 border-primary/20 backdrop-blur-2xl shadow-[0_0_50px_rgba(59,130,246,0.2)]">
+                    <DialogHeader>
+                        <div className="flex items-center gap-4 mb-4">
+                            <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20">
+                                {selectedNode && <selectedNode.icon className={`w-8 h-8 ${selectedNode.color}`} />}
+                            </div>
+                            <DialogTitle className="text-2xl font-black tracking-tight text-white uppercase">
+                                {selectedNode?.title}
+                            </DialogTitle>
+                        </div>
+                        <DialogDescription className="text-lg text-white/70 leading-relaxed font-light">
+                            {selectedNode?.desc}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="mt-8 flex justify-end">
+                        <DialogTitle className="sr-only">Actions</DialogTitle>
+                        <button
+                            onClick={() => setSelectedNode(null)}
+                            className="px-6 py-2 rounded-full bg-white text-black font-bold hover:bg-white/90 transition-all text-sm"
+                        >
+                            Fermer
+                        </button>
+                    </div>
+                </DialogContent>
+            </Dialog>
 
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -178,12 +259,15 @@ export const GSAPShowcase = () => {
     );
 };
 
-const HexNode = ({ icon: Icon, label, color }: { icon: any, label: string, color: string }) => (
-    <div className="w-28 h-32 relative group cursor-default transition-transform hover:-translate-y-2 duration-300">
+const HexNode = ({ icon: Icon, label, color, onClick }: { icon: any, label: string, color: string, onClick: () => void }) => (
+    <div
+        onClick={onClick}
+        className="w-28 h-32 relative group cursor-pointer transition-transform hover:-translate-y-2 duration-300"
+    >
         <div className="absolute inset-0 bg-secondary/80 backdrop-blur-md clip-hex border border-white/10 shadow-xl transition-colors group-hover:bg-primary/10" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-2">
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 p-2 text-center">
             <Icon className={`w-8 h-8 ${color} mb-2 drop-shadow-lg`} />
-            <span className="text-[10px] font-bold text-foreground/70 tracking-wider text-center">{label}</span>
+            <span className="text-[10px] font-bold text-foreground/70 tracking-wider uppercase">{label}</span>
         </div>
     </div>
 );

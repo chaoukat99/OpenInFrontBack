@@ -15,39 +15,6 @@ interface HeroSectionProps {
 
 export function HeroSection({ type, topTitle, badgeText }: HeroSectionProps) {
   const { t } = useLanguage();
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const words = useMemo(() => [
-    t('hero.words.excellence'),
-    t('hero.words.talent'),
-    t('hero.words.innovation')
-  ], [t]);
-
-  useEffect(() => {
-    const typingSpeed = isDeleting ? 50 : 100;
-    const word = words[currentWordIndex];
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting && displayText !== word) {
-        // Typing
-        setDisplayText(word.substring(0, displayText.length + 1));
-      } else if (isDeleting && displayText !== "") {
-        // Deleting
-        setDisplayText(word.substring(0, displayText.length - 1));
-      } else if (!isDeleting && displayText === word) {
-        // Pause at the end of word
-        setTimeout(() => setIsDeleting(true), 200);
-      } else if (isDeleting && displayText === "") {
-        // Finished deleting, move to next word
-        setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentWordIndex, words]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -186,16 +153,13 @@ export function HeroSection({ type, topTitle, badgeText }: HeroSectionProps) {
           variants={titleVariants}
           className="max-w-5xl text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] text-white"
         >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+          <div className="flex flex-row items-center justify-center gap-2 md:gap-4 flex-wrap">
             {/* Top Title Removed */}
-            <span className="opacity-90">{t('hero.title_prefix')}</span>
-            <span className="relative inline-block bg-gradient-to-r from-primary via-indigo-400 to-accent bg-clip-text text-transparent min-w-[2ch]">
-              {displayText}
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-                className="inline-block w-[3px] h-[0.85em] bg-indigo-400 ml-2 translate-y-1"
-              />
+            <span className="opacity-90 whitespace-nowrap">{t('hero.title_prefix')}</span>
+            <span
+              className="relative inline-flex items-center bg-gradient-to-r from-primary via-indigo-400 to-accent bg-clip-text text-transparent"
+            >
+              {t('hero.words.excellence')}
             </span>
           </div>
         </motion.h1>

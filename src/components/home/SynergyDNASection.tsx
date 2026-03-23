@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Building2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Building2, Zap } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { SectionGlow } from "@/components/ui/SectionGlow";
@@ -168,13 +168,13 @@ export const SynergyDNASection = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden bg-black py-24">
+        <section ref={containerRef} className="relative min-h-screen flex flex-col justify-start overflow-hidden bg-black pt-4 pb-24">
             {/* Canvas Background */}
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0 opacity-60" />
 
             {/* Content Overlay */}
             <div className="container relative z-10 px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
                     {/* Left: Text Content */}
                     <div className="dna-content space-y-8">
@@ -186,8 +186,8 @@ export const SynergyDNASection = () => {
                             {t('synergy_dna.badge')}
                         </div>
 
-                        <h2 className="text-5xl md:text-7xl font-bold font-heading leading-tight text-white">
-                            {t('synergy_dna.title')} <br />
+                        <h2 className="text-2xl md:text-4xl font-bold font-heading leading-tight text-white">
+                            {t('synergy_dna.title')}{' '}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                                 {t('synergy_dna.title_highlight')}
                             </span>
@@ -197,21 +197,15 @@ export const SynergyDNASection = () => {
                             {t('synergy_dna.description')}
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                            <Button variant="default" size="lg" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8 h-12 text-base">
-                                <Link to="/consultant-register" className="flex items-center gap-2">
-                                    {t('synergy_dna.btn_find')} <ArrowRight className="w-5 h-5" />
-                                </Link>
-                            </Button>
-                        </div>
+                    
                     </div>
 
                     {/* Right: Floating Cards (Simulating 'Matches') */}
-                    <div className="relative h-[600px] flex items-center justify-center">
+                    <div className="relative h-[600px]">
                         {/* Central visualization is mainly the canvas, but let's add some floating UI cards that interact with the 'DNA' visually */}
 
                         {/* Card 1: Consultant */}
-                        <div className="dna-card absolute top-10 right-10 md:right-20 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl w-64 shadow-2xl shadow-blue-500/10">
+                        <div className="dna-card absolute top-0 right-10 md:right-20 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl w-64 shadow-2xl shadow-blue-500/10">
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-cyan-300 flex items-center justify-center text-black font-bold text-xs">CF</div>
                                 <div>
@@ -229,7 +223,7 @@ export const SynergyDNASection = () => {
                         </div>
 
                         {/* Card 2: Match */}
-                        <div className="dna-card absolute top-1/2 left-0 md:left-10 -translate-y-1/2 p-4 rounded-full bg-black/60 border border-green-500/50 backdrop-blur-xl flex items-center gap-4 pr-8 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+                        <div className="dna-card absolute top-[35%] left-0 md:left-10 -translate-y-1/2 p-4 rounded-full bg-black/60 border border-green-500/50 backdrop-blur-xl flex items-center gap-4 pr-8 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
                             <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/50">
                                 <CheckCircle2 className="w-6 h-6 text-green-500" />
                             </div>
@@ -240,7 +234,7 @@ export const SynergyDNASection = () => {
                         </div>
 
                         {/* Card 3: Company */}
-                        <div className="dna-card absolute bottom-20 right-0 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl w-64 shadow-2xl shadow-purple-500/10">
+                        <div className="dna-card absolute top-[45%] right-0 p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl w-64 shadow-2xl shadow-purple-500/10">
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-pink-300 flex items-center justify-center text-black font-bold">
                                     <Building2 className="w-5 h-5" />
@@ -256,6 +250,17 @@ export const SynergyDNASection = () => {
                                     <span className="px-2 py-1 rounded bg-white/5 text-[10px] text-gray-300 border border-white/5">Senior</span>
                                     <span className="px-2 py-1 rounded bg-white/5 text-[10px] text-gray-300 border border-white/5">React</span>
                                 </div>
+                            </div>
+                        </div>
+
+                         {/* Card 4: Technical Validation (Newly updated) */}
+                         <div className="dna-card absolute top-[65%] left-0 md:left-10 p-4 rounded-full bg-black/60 border border-cyan-500/50 backdrop-blur-xl flex items-center gap-4 pr-8 shadow-[0_0_30px_rgba(6,182,212,0.2)]">
+                            <div className="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center border border-cyan-500/50">
+                                <Zap className="w-6 h-6 text-cyan-500" />
+                            </div>
+                            <div>
+                                <div className="text-sm font-bold text-white">{t('synergy_dna.cards.validated_expertise')}</div>
+                                <div className="text-xs text-cyan-400">{t('synergy_dna.cards.technical_score')}</div>
                             </div>
                         </div>
                     </div>

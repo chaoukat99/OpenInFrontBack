@@ -14,6 +14,12 @@ import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Logo } from "@/components/ui/Logo";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const circularNavItems = [
     {
@@ -44,13 +50,7 @@ const circularNavItems = [
         color: "from-[#EC4899] via-[#D946EF] to-[#A855F7]",
         shadowColor: "shadow-pink-500/30"
     },
-    {
-        href: "/resources",
-        tKey: "navbar.ressource",
-        icon: FileText,
-        color: "from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9]",
-        shadowColor: "shadow-purple-500/30"
-    },
+    
 ];
 
 export function CircularNavbar() {
@@ -72,7 +72,7 @@ export function CircularNavbar() {
                     <div className="mx-auto mt-2 max-w-fit px-2 sm:px-4 pointer-events-auto flex items-center justify-center">
                         <nav className="relative">
                             <div
-                                className="backdrop-blur-3xl border border-white/10 rounded-full p-1.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.9)] flex items-center gap-3 sm:gap-4 overflow-x-auto scrollbar-hide max-w-[98vw] ring-1 ring-white/5"
+                                className="backdrop-blur-3xl border border-white/10 rounded-full p-2.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.9)] flex items-center gap-6 sm:gap-8 overflow-x-auto scrollbar-hide max-w-[98vw] ring-1 ring-white/5"
                                 style={{ background: "radial-gradient(circle at 50% 30%, #354759 0%, #192432 100%)" }}
                             >
                                 {/* Logo */}
@@ -81,15 +81,16 @@ export function CircularNavbar() {
                                 </Link>
 
                                 {/* Navigation Items */}
-                                <div className="flex items-center gap-1 sm:gap-2.5">
+                                <div className="flex items-center gap-4 sm:gap-6">
                                     {circularNavItems.map((item, index) => {
                                         const isActive = location.pathname === item.href;
                                         return (
                                             <div key={item.href} className="flex items-center">
                                                 <Link to={item.href} id={`nav-${item.tKey}`}>
                                                     <motion.div
+                                                    
                                                         className="relative group"
-                                                        whileHover={{ y: -4, scale: 1.05 }}
+                                                        whileHover={{ y: -12, scale: 1.2, rotate: 4 }}
                                                         whileTap={{ scale: 0.95 }}
                                                         transition={{ type: "spring", stiffness: 400, damping: 20 }}
                                                     >
@@ -97,6 +98,7 @@ export function CircularNavbar() {
                                                         {isActive && (
                                                             <motion.div
                                                                 layoutId="nav-glow"
+                                                                style={{padding:10}}
                                                                 className={cn(
                                                                     "absolute inset-[-3px] rounded-full blur-lg opacity-40",
                                                                     `bg-gradient-to-br ${item.color}`
@@ -105,8 +107,10 @@ export function CircularNavbar() {
                                                         )}
 
                                                         {/* Circle Item */}
-                                                        <div className={cn(
-                                                            "relative w-[38px] h-[38px] sm:w-[50px] sm:h-[50px] rounded-full border-[1.5px] overflow-hidden flex flex-col transition-all duration-500",
+                                                        <div 
+                                                        
+                                                        className={cn(
+                                                            "relative w-[48px] h-[48px] sm:w-[68px] sm:h-[68px] rounded-full border-[1.5px] overflow-hidden flex flex-col transition-all duration-500",
                                                             isActive
                                                                 ? "border-white/60 shadow-xl ring-2 ring-white/10 scale-105"
                                                                 : "border-white/5 group-hover:border-white/25 shadow-md",
@@ -123,7 +127,7 @@ export function CircularNavbar() {
                                                                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                                                                     className="relative z-10"
                                                                 >
-                                                                    <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.3)]" />
+                                                                    <item.icon className="w-5 h-5 sm:w-7 sm:h-7 text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.3)]" />
                                                                 </motion.div>
                                                             </div>
 
@@ -133,9 +137,10 @@ export function CircularNavbar() {
                                                                 "bg-[#1a262f] group-hover:bg-[#2c3d4a] transition-colors"
                                                             )}>
                                                                 <div className="absolute inset-0 shadow-[inset_0_1.5px_6px_rgba(0,0,0,0.5)] pointer-events-none" />
-                                                                <span className={cn(
-                                                                    "text-[5.5px] sm:text-[7.5px] font-bold tracking-tight leading-none transition-all uppercase whitespace-pre-line text-center",
-                                                                    isActive ? "text-white" : "text-white/40 group-hover:text-white"
+                                                                <span
+                                                                className={cn(
+                                                                    "text-[7px] sm:text-[9.5px] font-bold tracking-tight leading-none transition-all uppercase whitespace-pre-line text-center",
+                                                                     isActive ? "text-white" : "text-white/40 group-hover:text-white"
                                                                 )}>
                                                                     {t(item.tKey)}
                                                                 </span>
@@ -164,67 +169,105 @@ export function CircularNavbar() {
                                         );
                                     })}
                                 </div>
+
+                                {/* Integrated Controls (Action Panel) */}
+                                <div className="flex items-center gap-2 sm:gap-4 pl-4 border-l border-white/10 ml-2">
+                                    <div className="flex items-center gap-1.5 sm:gap-2">
+                                        <LanguageSelector />
+                                        <div className="w-px h-5 bg-white/10 hidden sm:block" />
+                                        <ThemeSwitcher />
+                                    </div>
+
+                                    <div className="w-px h-6 bg-white/15 mx-1" />
+
+                                    {/* Action Buttons */}
+                                    <div className="flex items-center gap-2 pr-4">
+                                        {/* Login Dropdown */}
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <div className="cursor-pointer">
+                                                    <div className="hidden sm:block">
+                                                        <motion.button
+                                                            whileHover={{ y: -2, scale: 1.05 }}
+                                                            whileTap={{ scale: 0.95 }}
+                                                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/15
+                                                                       text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5
+                                                                       transition-all duration-200 text-xs font-semibold tracking-wide"
+                                                        >
+                                                            <LogIn className="w-3.5 h-3.5" />
+                                                            <span className="hidden lg:inline">{t("navbar.login") || "Login"}</span>
+                                                        </motion.button>
+                                                    </div>
+                                                    <div className="sm:hidden">
+                                                        <LogIn className="w-5 h-5 text-white/70" />
+                                                    </div>
+                                                </div>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end" className="w-48 bg-[#0f172a]/95 border-white/10 backdrop-blur-xl text-white">
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/company-login" className="flex items-center gap-2">
+                                                        <Building2 className="w-4 h-4 text-yellow-400" />
+                                                        <span>{t('gsap_showcase.visual.company')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/consultant-login" className="flex items-center gap-2">
+                                                        <Users className="w-4 h-4 text-green-400" />
+                                                        <span>{t('gsap_showcase.visual.talent')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/company-login" className="flex items-center gap-2">
+                                                        <Briefcase className="w-4 h-4 text-teal-400" />
+                                                        <span>{t('gsap_showcase.visual.cabinet')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+
+                                        {/* Signup Dropdown */}
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <motion.button
+                                                    whileHover={{ y: -2, scale: 1.05 }}
+                                                    whileTap={{ scale: 0.95 }}
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white
+                                                               text-xs font-semibold tracking-wide shadow-md
+                                                               transition-all duration-200 cursor-pointer"
+                                                    style={{ background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)" }}
+                                                >
+                                                    <UserPlus className="w-3.5 h-3.5" />
+                                                    <span className="hidden sm:inline">{t("navbar.signup") || "Sign Up"}</span>
+                                                </motion.button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end" className="w-48 bg-[#0f172a]/95 border-white/10 backdrop-blur-xl text-white">
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/company-register" className="flex items-center gap-2">
+                                                        <Building2 className="w-4 h-4 text-yellow-400" />
+                                                        <span>{t('gsap_showcase.visual.company')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/consultant-register" className="flex items-center gap-2">
+                                                        <Users className="w-4 h-4 text-green-400" />
+                                                        <span>{t('gsap_showcase.visual.talent')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem asChild className="focus:bg-white/10 focus:text-white cursor-pointer py-2">
+                                                    <Link to="/cabinet-conseil" className="flex items-center gap-2">
+                                                        <Briefcase className="w-4 h-4 text-teal-400" />
+                                                        <span>{t('gsap_showcase.visual.cabinet')}</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
                             </div>
                         </nav>
-                    </div>
-
-                    {/* ── Desktop: right floating panel — outside the pill ── */}
-                    <motion.div
-                        id="navbar-right-panel"
-                        initial={{ y: -60, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                        className="hidden md:flex absolute top-3 right-4 items-center gap-2 pointer-events-auto"
-                    >
-                        <LanguageSelector />
-
-                        <div className="w-px h-5 bg-white/10" />
-
-                        <ThemeSwitcher />
-
-                        <div className="w-px h-5 bg-white/10" />
-
-                        {/* Login */}
-                        <Link to="/login">
-                            <motion.button
-                                whileHover={{ y: -2, scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/15
-                                           text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5
-                                           transition-all duration-200 text-xs font-semibold tracking-wide"
-                            >
-                                <LogIn className="w-3.5 h-3.5" />
-                                <span>{t("navbar.login") || "Login"}</span>
-                            </motion.button>
-                        </Link>
-
-                        {/* Sign Up */}
-                        <Link to="/register">
-                            <motion.button
-                                whileHover={{ y: -2, scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                                className="flex items-center gap-1.5 px-3 py-1 rounded-full text-white
-                                           text-xs font-semibold tracking-wide
-                                           shadow-md shadow-violet-500/25 hover:shadow-violet-500/50
-                                           transition-all duration-200"
-                                style={{ background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)" }}
-                            >
-                                <UserPlus className="w-3.5 h-3.5" />
-                                <span>{t("navbar.signup") || "Sign Up"}</span>
-                            </motion.button>
-                        </Link>
-                    </motion.div>
-
-                    {/* ── Mobile: compact controls top-right ── */}
-                    <div className="absolute top-3 right-3 md:hidden pointer-events-auto flex items-center gap-1.5 scale-90 origin-top-right">
-                        <LanguageSelector />
-                        <div className="w-px h-4 bg-white/10" />
-                        <ThemeSwitcher />
                     </div>
                 </motion.header>
             )}
         </AnimatePresence>
     );
-}
+};

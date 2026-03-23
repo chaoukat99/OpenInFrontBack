@@ -27,6 +27,7 @@ import {
   FileCheck,
   TrendingUp,
   Truck,
+  SearchCheck,
 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -43,30 +44,66 @@ export function FeaturesSection({ type }: FeaturesSectionProps) {
 
   const companyFeatures = [
     {
-      icon: LayoutDashboard,
-      title: "Tableau de bord",
-      description: "Visualisez en temps réel l'ensemble de votre activité, vos recrutements en cours et vos statistiques clés.",
+      icon: Brain,
+      title: t('features_company.items.matching_ai.title'),
       color: "from-primary to-cyan-400",
       link: "/company/dashboard",
     },
     {
       icon: Search,
-      title: "Recherche Profils & Entretien",
-      description: "Identifiez les meilleurs talents grâce à notre moteur de recherche IA et automatisez les pré-qualifications.",
+      title: t('features_company.items.search.title'),
       color: "from-accent to-pink-400",
       link: "/company/search-talents",
     },
     {
       icon: Users,
-      title: "Gestion des Consultants",
-      description: "Gérez facilement votre vivier de consultants, leurs missions et leurs documents administratifs.",
+      title: t('features_company.items.consultants_base.title'),
       color: "from-emerald-400 to-teal-400",
       link: "/company/missions",
     },
     {
-      icon: Building2,
-      title: "PORTAIL SALARIAL",
-      description: "Simplifiez la gestion de la paie et des avantages sociaux pour l'ensemble de vos collaborateurs.",
+      icon: LayoutDashboard,
+      title: t('features_company.items.company_portal.title'),
+      color: "from-orange-400 to-amber-400",
+    },
+    {
+      icon: Zap,
+      title: t('features_company.items.instant_match.title'),
+      color: "from-yellow-400 to-orange-500",
+    },
+    {
+      icon: Shield,
+      title: t('features_company.items.verified_profiles.title'),
+      color: "from-blue-500 to-indigo-600",
+    },
+    {
+      icon: Globe,
+      title: t('features_company.items.global_network.title'),
+      color: "from-cyan-500 to-blue-600",
+    },
+    {
+      icon: Star,
+      title: t('features_company.items.smart_reco.title'),
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: TrendingUp,
+      title: t('features_company.items.analytics.title'),
+      color: "from-blue-600 to-cyan-400",
+    },
+    {
+      icon: Shield,
+      title: t('features_company.items.compliance.title'),
+      color: "from-emerald-500 to-teal-400",
+    },
+    {
+      icon: SearchCheck,
+      title: t('features_company.items.sourcing.title'),
+      color: "from-indigo-400 to-purple-500",
+    },
+    {
+      icon: Mic,
+      title: t('features_company.items.support.title'),
       color: "from-orange-400 to-amber-400",
     },
   ];
@@ -319,9 +356,11 @@ export function FeaturesSection({ type }: FeaturesSectionProps) {
                           {feature.link && <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full border border-primary/20">Go</span>}
                         </h3>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {feature.description}
-                      </p>
+                      {feature.description && (
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {feature.description}
+                        </p>
+                      )}
                     </GlassCard>
                   </Link>
                 ) : (
@@ -336,9 +375,11 @@ export function FeaturesSection({ type }: FeaturesSectionProps) {
                         {feature.title}
                       </h3>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
+                    {feature.description && (
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
+                    )}
                   </GlassCard>
                 )}
               </motion.div>

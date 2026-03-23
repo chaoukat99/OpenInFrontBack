@@ -221,6 +221,34 @@
                     "en": "Receive mission and candidate recommendations based on your history and preferences.",
                     "ar": "تلقي توصيات بالمهام والمرشحين بناءً على تاريخك وتفضيلاتك."
                 }
+            },
+            "analytics": {
+                "title": {
+                    "fr": "Analyses RH",
+                    "en": "HR Analytics",
+                    "ar": "تحليلات الموارد البشرية"
+                }
+            },
+            "compliance": {
+                "title": {
+                    "fr": "Conformité Légale",
+                    "en": "Legal Compliance",
+                    "ar": "الامتثال القانوني"
+                }
+            },
+            "sourcing": {
+                "title": {
+                    "fr": "Sourcing Automatisé",
+                    "en": "Automated Sourcing",
+                    "ar": "التوظيف الآلي"
+                }
+            },
+            "support": {
+                "title": {
+                    "fr": "Support 24/7",
+                    "en": "24/7 Support",
+                    "ar": "دعم 24/7"
+                }
             }
         }
     },
@@ -427,7 +455,7 @@
             "ar": "INNOVATION"
         },
         "title_part2": {
-            "fr": "PARTNERS",
+            "fr": "PARTNERS test test test test test",
             "en": "PARTNERS",
             "ar": "PARTNERS"
         },
@@ -464,20 +492,45 @@
                 "en": "Core Logic",
                 "ar": "المنطق الأساسي"
             },
-            "security": {
-                "fr": "SECURITY",
-                "en": "SECURITY",
-                "ar": "الأمان"
+            "talent": {
+                "fr": "TALENT",
+                "en": "TALENT",
+                "ar": "المواهب"
             },
-            "data": {
-                "fr": "DATA",
-                "en": "DATA",
-                "ar": "البيانات"
+            "talent_desc": {
+                "fr": "Découvrez notre vivier d'experts tech. Chaque profil est rigoureusement évalué par notre algorithme de matching pour garantir une synergie parfaite avec vos besoins.",
+                "en": "Discover our pool of tech experts. Each profile is rigorously evaluated by our matching algorithm to ensure perfect synergy with your needs.",
+                "ar": "اكتشف مجموعة خبراء التقنية لدينا. يتم تقييم كل ملف شخصي بدقة بواسطة خوارزمية المطابقة لضمان التآزر المثالي مع احتياجاتك."
             },
-            "neural": {
-                "fr": "NEURAL",
-                "en": "NEURAL",
-                "ar": "عصبي"
+            "company": {
+                "fr": "ENTREPRISE",
+                "en": "COMPANY",
+                "ar": "الشركة"
+            },
+            "company_desc": {
+                "fr": "Accélérez votre transformation digitale en collaborant avec les entreprises les plus innovantes. Nous connectons les porteurs de projets aux ressources idéales.",
+                "en": "Accelerate your digital transformation by collaborating with the most innovative companies. We connect project owners to the ideal resources.",
+                "ar": "سرع تحولك الرقمي من خلال التعاون مع أكثر الشركات ابتكاراً. نحن نربط أصحاب المشاريع بالموارد المثالية."
+            },
+            "cabinet": {
+                "fr": "CABINET CONSEIL",
+                "en": "CONSULTING FIRM",
+                "ar": "مكتب استشاري"
+            },
+            "cabinet_desc": {
+                "fr": "Bénéficiez d'un accompagnement stratégique sur mesure. Nos partenaires conseils vous aident à naviguer dans les défis technologiques complexes.",
+                "en": "Benefit from tailor-made strategic support. Our consulting partners help you navigate complex technological challenges.",
+                "ar": "استفد من الدعم الاستراتيجي المصمم خصيصاً. يساعدك شركاؤنا الاستشاريون في التغلب على التحديات التكنولوجية المعقدة."
+            },
+            "ghaya": {
+                "fr": "ESPACE GHAYA",
+                "en": "GHAYA SPACE",
+                "ar": "فضاء غاية"
+            },
+            "ghaya_desc": {
+                "fr": "L'agence AI de demain. Ghaya déploie des solutions d'intelligence artificielle sur mesure pour automatiser et optimiser vos processus métiers.",
+                "en": "The AI agency of tomorrow. Ghaya deploys tailor-made artificial intelligence solutions to automate and optimize your business processes.",
+                "ar": "وكالة الذكاء الاصطناعي للمستقبل. غاية تنشر حلول ذكاء اصطناعي مخصصة لأتمتة وتحسين عمليات عملك."
             }
         }
     },
@@ -532,6 +585,16 @@
                 "fr": "Mission Longue Durée",
                 "en": "Long-Term Mission",
                 "ar": "مهمة طويلة الأمد"
+            },
+            "validated_expertise": {
+                "fr": "Expertise Validée",
+                "en": "Validated Expertise",
+                "ar": "الخبرة المعتمدة"
+            },
+            "technical_score": {
+                "fr": "98% Score Technique",
+                "en": "98% Technical Score",
+                "ar": "98% درجة فنية"
             }
         }
     },
